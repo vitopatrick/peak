@@ -3,7 +3,31 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
+}
+
+model Package {
+  id               Int      @id @default(autoincrement())
+  sender_name      String
+  sender_phone     String
+  sender_address   String
+  receiver_name    String
+  receiver_phone   String
+  receiver_address String
+  tracking_number  String?
+  posting_date     String
+  description      String
+  weight           String
+  invoice_no       String?
+  book_status      String?
+  total_cost       String?
+  mode             String?
+  pickup_date      String
+  lat              String?
+  long             String?
+  current_location String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 }

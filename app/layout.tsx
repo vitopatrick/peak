@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import { Josefin_Sans } from "next/font/google";
+import { Quicksand } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/footer/Footer";
 import Navbar from "@/components/navbar/Navbar";
+import { Toaster } from "@/components/ui/sonner";
 
-const qs = Josefin_Sans({ subsets: ["latin"] });
+const qs = Quicksand({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Site Name",
-  description: "The New Site Name",
+  title: "Peak Serve",
+  description: "We Deliver Without Complaints",
 };
 
 export default function RootLayout({
@@ -22,6 +23,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <Toaster richColors position="top-center" />
       </body>
     </html>
   );
