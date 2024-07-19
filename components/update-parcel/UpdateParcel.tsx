@@ -51,7 +51,7 @@ export default function UpdateParcel({ id }: any) {
   });
 
   const onSubmit = async (values: z.infer<typeof updateSchema>) => {
-    const response = await updatePackage(values, id);
+    const response: any = await updatePackage(values, id);
 
     toast.success(response);
   };
