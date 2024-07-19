@@ -28,8 +28,8 @@ const HomePage = () => {
   return (
     <div>
       <Jumbotron
-        title="Welcome to Peak Services"
-        subtitle="where we offer relentless and swift logistics"
+        title="Experience the Future of Delivery Today!"
+        subtitle="Tired of waiting for your packages? Looking for a reliable and fast courier service that understands the urgency of your needs? Look no further!"
       />
       <div className="my-4">
         <h3 className="text-center font-bold text-3xl capitalize">
