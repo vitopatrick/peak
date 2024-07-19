@@ -1,4 +1,7 @@
+"use client";
+
 import Jumbotron from "@/components/jumbotron/Jumbotron";
+import useTidioChat from "@/hooks/useChatSupport";
 import { Clock12, Computer, ShoppingBasket } from "lucide-react";
 
 const services = [
@@ -25,6 +28,8 @@ const services = [
 ];
 
 const HomePage = () => {
+  useTidioChat();
+
   return (
     <div>
       <Jumbotron
