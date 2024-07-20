@@ -3,7 +3,7 @@ import { useEffect } from "react";
 const useTidioChat = () => {
   useEffect(() => {
     const script = document.createElement("script");
-    script.src = "//code.tidio.co/wzz59nlshlkvxfmepnbh2jujamzygyaf.js";
+    script.src = "//code.tidio.co/komdfuc9mnpqkl86ax6okjjs1h4tm0ek.js";
     script.async = true;
     document.body.appendChild(script);
 
@@ -14,3 +14,4 @@ const useTidioChat = () => {
 };
 
 export default useTidioChat;
+
