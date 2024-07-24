@@ -8,7 +8,7 @@ const ControlPage = async () => {
   return (
     <div>
       <CreateParcelForm />
-      {packages.length > 0 && <PackagesTable packages={packages} />}
+      {packages && <PackagesTable packages={packages} />}
     </div>
   );
 };
