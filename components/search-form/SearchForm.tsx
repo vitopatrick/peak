@@ -30,6 +30,7 @@ const SearchForm = () => {
   });
 
   const [parcel, setParcel] = useState<any>();
+  const [error, setError] = useState<any>();
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const parcel = await findPackages(values.tracking_number);
@@ -37,7 +38,7 @@ const SearchForm = () => {
     if (parcel) {
       setParcel(parcel);
     } else {
-      return "Could not Fetch";
+      setError("Parcel Does not exist");
     }
   }
 
@@ -65,6 +66,7 @@ const SearchForm = () => {
         </form>
       </Form>
       <ParcelInfo info={parcel} />
+      {error && <p className="text-center p-4 text-red-800 text-xl">{error}</p>}
     </div>
   );
 };

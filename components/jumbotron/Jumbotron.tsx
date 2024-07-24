@@ -18,7 +18,9 @@ const Jumbotron = ({
       }}
     >
       <div className="bg-black/60 h-full flex items-center justify-center flex-col space-y-3">
-        <h4 className="font-bold text-2xl lg:text-4xl text-white">{title}</h4>
+        <h4 className="font-bold text-2xl lg:text-4xl text-white text-center">
+          {title}
+        </h4>
         <p className="text-white text-center">{subtitle}</p>
       </div>
     </div>
