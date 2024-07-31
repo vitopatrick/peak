@@ -1,30 +1,22 @@
 "use client";
 
-import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 
 const Map = () => {
   return (
     <div>
-      <LoadScript googleMapsApiKey="">
-        <GoogleMap
-          mapContainerStyle={{
-            height: "100%",
-            width: "100%",
-          }}
-          zoom={10}
-          center={{
-            lat: 7.2905715,
-            lng: 80.6337262,
-          }}
-        >
-          <MarkerF
-            position={{
-              lat: 7.2905715,
-              lng: 80.6337262,
-            }}
-          />
-        </GoogleMap>
-      </LoadScript>
+      <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={[51.505, -0.09]}>
+          <Popup>
+            Peak serve <br /> Easily customizable.
+          </Popup>
+        </Marker>
+      </MapContainer>
     </div>
   );
 };

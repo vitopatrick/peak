@@ -1,10 +1,10 @@
 import { formalDate } from "@/lib/format";
-import Map from "../map/Map";
+// import Map from "../map/Map";
 
 const ParcelInfo = ({ info }: any) => {
   return (
     <div className="lg:w-[50%] mx-auto p-3">
-      <Map />
+      {/* <Map /> */}
       {/* container */}
       {info && (
         <div className="grid grid-cols-2 gap-3">
