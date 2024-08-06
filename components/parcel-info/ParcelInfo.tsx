@@ -12,24 +12,82 @@ const ParcelInfo = ({ info }: any) => {
           <div>
             <h3 className="font-semibold capitalize">Sender Information</h3>
             <div className="space-y-3 mt-3">
-              <p>Sender Name: {info.sender_name}</p>
-              <p>Sender Phone: {info.sender_phone}</p>
-              <p>Sender Address: {info.sender_address}</p>
-              <p>Posting Date: {formalDate(info.posting_date)}</p>
+              <p>
+                Sender Name:{" "}
+                <span className="font-semibold capitalize">
+                  {info.sender_name}
+                </span>
+              </p>
+              <p>
+                Sender Phone:{" "}
+                <span className="font-semibold capitalize">
+                  {info.sender_phone}
+                </span>
+              </p>
+              <p>
+                Sender Address:{" "}
+                <span className="font-semibold capitalize">
+                  {" "}
+                  {info.sender_address}
+                </span>
+              </p>
+              <p>
+                Posting Date:{" "}
+                <span className="font-semibold capitalize">
+                  {formalDate(info.posting_date)}
+                </span>{" "}
+              </p>
             </div>
           </div>
           {/* Delivery Info */}
           <div>
             <h3 className="font-semibold capitalize">Delivery Information</h3>
             <div className="space-y-3 mt-3">
-              <p>Receiver Name: {info.receiver_name}</p>
-              <p>Weight: {info.weight}kg</p>
-              <p>Receiver Phone: {info.receiver_phone}</p>
-              <p>Receiver Address: {info.receiver_address}</p>
-              <p>Pick Up Date:{formalDate(info.pickup_date)}</p>
-              <p>Tracking Number: {info.tracking_number}</p>
-              <p>Status:{info.book_status}</p>
-              <p>last updated:{formalDate(info.updatedAt)}</p>
+              <p>
+                Receiver Name:{" "}
+                <span className="font-semibold capitalize">
+                  {info.receiver_name}
+                </span>{" "}
+              </p>
+              <p>
+                Weight:{" "}
+                <span className="font-semibold capitalize">
+                  {info.weight}kg
+                </span>{" "}
+              </p>
+              <p>
+                Receiver Phone:{" "}
+                <span className="font-semibold capitalize">
+                  {" "}
+                  {info.receiver_phone}
+                </span>
+              </p>
+              <p>
+                Receiver Address:{" "}
+                <span className="font-semibold capitalize">
+                  {" "}
+                  {info.receiver_address}
+                </span>
+              </p>
+              <p>
+                Pick Up Date:{" "}
+                <span className="font-semibold capitalize">
+                  {formalDate(info.pickup_date)}
+                </span>
+              </p>
+              <p>
+                Tracking Number:{" "}
+                <span className=" uppercase font-mono">
+                  {info.tracking_number}
+                </span>{" "}
+              </p>
+              <p>Status: {info.book_status}</p>
+              <p>
+                last updated:{" "}
+                <span className="font-semibold capitalize">
+                  {formalDate(info.updatedAt)}
+                </span>
+              </p>
             </div>
           </div>
         </div>
