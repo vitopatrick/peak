@@ -1,9 +1,15 @@
+"use client";
+
 import { formalDate } from "@/lib/format";
-import LeafletMap from "../map/Map";
-// import Map from "../map/Map";
+import dynamic from "next/dynamic";
+
+const LeafletMap = dynamic(() => import("../map/Map"), {
+  ssr: false, // Disable SSR for the map component
+});
+
+// import LeafletMap from "../map/Map";
 
 const ParcelInfo = ({ info }: any) => {
-  console.log(info);
   return (
     <div className="lg:w-[50%] mx-auto p-3">
       {info && (
