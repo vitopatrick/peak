@@ -18,16 +18,15 @@ model Package {
   receiver_phone   String
   receiver_address String
   tracking_number  String?
-  posting_date     String
-  description      String
+  posting_date     DateTime
+  description      String?
   weight           String
   invoice_no       String?
   book_status      String?
   total_cost       String?
-  mode             String?
-  pickup_date      String
-  lat              String?
-  long             String?
+  pickup_date      DateTime
+  lat              Float? @default(46.4702)
+  long             Float? @default(30.7306)
   current_location String?
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt

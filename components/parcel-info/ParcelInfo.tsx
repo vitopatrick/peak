@@ -1,13 +1,21 @@
 import { formalDate } from "@/lib/format";
+import LeafletMap from "../map/Map";
 // import Map from "../map/Map";
 
 const ParcelInfo = ({ info }: any) => {
+  console.log(info);
   return (
     <div className="lg:w-[50%] mx-auto p-3">
-      {/* <Map /> */}
+      {info && (
+        <LeafletMap
+          lat={+info.lat}
+          long={+info.long}
+          location={info.current_location}
+        />
+      )}
       {/* container */}
       {info && (
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
           {/* send info */}
           <div>
             <h3 className="font-semibold capitalize">Sender Information</h3>
@@ -81,7 +89,12 @@ const ParcelInfo = ({ info }: any) => {
                   {info.tracking_number}
                 </span>{" "}
               </p>
-              <p>Status: {info.book_status}</p>
+              <p>
+                Status:{" "}
+                <span className="font-semibold capitalize">
+                  {info.book_status === null ? "in Office" : info.book_status}
+                </span>
+              </p>
               <p>
                 last updated:{" "}
                 <span className="font-semibold capitalize">

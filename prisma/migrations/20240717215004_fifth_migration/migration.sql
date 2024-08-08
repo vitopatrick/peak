@@ -1,4 +1,0 @@
--- AlterTable
-ALTER TABLE "Package" ALTER COLUMN "lat" DROP NOT NULL,
-ALTER COLUMN "long" DROP NOT NULL,
-ALTER COLUMN "current_location" DROP NOT NULL;

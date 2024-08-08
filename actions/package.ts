@@ -9,31 +9,39 @@ import { updateSchema } from "@/components/update-parcel/UpdateParcel";
 
 export const addPackage = async (values: z.infer<typeof formSchema>) => {
   try {
-    let tracking_number = cuid();
+    const trackingNumber = cuid();
 
-    await prisma.package.create({
-      data: {
-        tracking_number,
-        description: values.description,
-        pickup_date: `${values.pickup_date}`,
-        posting_date: `${values.posting_date}`,
-        sender_address: values.sender_address,
-        sender_name: values.sender_name,
-        sender_phone: values.sender_phone,
-        receiver_address: values.receiver_address,
-        receiver_name: values.receiver_name,
-        receiver_phone: values.receiver_phone,
-        weight: values.weight,
-      },
+    const packageData = {
+      tracking_number: trackingNumber,
+      description: values.description,
+      sender_address: values.sender_address,
+      sender_name: values.sender_name,
+      sender_phone: values.sender_phone,
+      receiver_address: values.receiver_address,
+      receiver_name: values.receiver_name,
+      receiver_phone: values.receiver_phone,
+      weight: values.weight,
+      pickup_date: values.pickup_date,
+      posting_date: values.pickup_date,
+    };
+
+    const createdPackage = await prisma.package.create({
+      data: packageData,
     });
 
-    revalidatePath("/control");
+    // Consider conditional revalidation based on success
+    if (createdPackage) {
+      revalidatePath("/control");
+    }
 
     return {
-      message: "Created Package",
+      message: "Package created successfully",
+      packageId: createdPackage.id,
     };
   } catch (error) {
-    return error;
+    console.error("Error creating package:", error);
+    // Handle error based on error type (e.g., validation, database)
+    return { error: "An error occurred while creating the package" };
   }
 };
 
@@ -64,17 +72,29 @@ export const updatePackage = async (
   id: any
 ) => {
   try {
+    const prevPackage = await prisma.package.findFirst({
+      where: {
+        id,
+      },
+    });
+
     await prisma.package.update({
       where: {
         id,
       },
       data: {
-        lat: values.lat,
-        long: values.long,
-        current_location: values.current_location,
-        book_status: values.status,
+        lat: !prevPackage?.lat ? prevPackage?.lat : +values.lat,
+        long: !prevPackage?.long ? prevPackage?.long : +values.long,
+        current_location: !prevPackage?.current_location
+          ? prevPackage?.current_location
+          : values.current_location,
+        book_status: !prevPackage?.book_status
+          ? prevPackage?.book_status
+          : values.status,
       },
     });
+
+    revalidatePath("/control");
 
     return "Updated";
   } catch (error) {
