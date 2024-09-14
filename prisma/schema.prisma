@@ -1,14 +1,14 @@
 generator client {
   provider = "prisma-client-js"
-   binaryTargets = ["native", "rhel-openssl-1.0.x"]
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
 }
 
+// prisma/schema.prisma
 datasource db {
   provider  = "postgresql"
-  url       = env("DATABASE_URL")
+  url  	    = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
-
 model Package {
   id               Int      @id @default(autoincrement())
   sender_name      String

@@ -36,7 +36,7 @@ export const addPackage = async (values: z.infer<typeof formSchema>) => {
 
     return {
       message: "Package created successfully",
-      packageId: createdPackage.id,
+      // packageId: createdPackage.id,
     };
   } catch (error) {
     console.error("Error creating package:", error);
