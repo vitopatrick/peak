@@ -41,7 +41,10 @@ export const addPackage = async (values: z.infer<typeof formSchema>) => {
   } catch (error) {
     console.error("Error creating package:", error);
     // Handle error based on error type (e.g., validation, database)
-    return { error: "An error occurred while creating the package" };
+    return {
+      message: "An error occurred while creating the package",
+      error,
+    };
   }
 };
 
