@@ -5,12 +5,10 @@ import PackagesTable from "@/components/packages_table/PackagesTable";
 const ControlPage = async () => {
   const packages: any = await getPackages();
 
-  // console.log(packages);
-
   return (
     <div>
       <CreateParcelForm />
-      {/* {packages && <PackagesTable packages={packages} />} */}
+      <PackagesTable packages={packages} />
     </div>
   );
 };

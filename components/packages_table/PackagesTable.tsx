@@ -7,12 +7,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "../ui/button";
-import { PenBox, Trash } from "lucide-react";
+import { Trash } from "lucide-react";
 import { prisma } from "@/prisma/script";
 import { revalidatePath } from "next/cache";
 import UpdateParcel from "../update-parcel/UpdateParcel";
 
 export default function PackagesTable({ packages }: any) {
+  // console.log(packages);
+
   const delete_parcel = async (id: any) => {
     "use server";
 
