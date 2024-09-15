@@ -83,14 +83,28 @@ export const updatePackage = async (
         id,
       },
       data: {
-        lat: !prevPackage?.lat ? prevPackage?.lat : +values.lat,
-        long: !prevPackage?.long ? prevPackage?.long : +values.long,
-        current_location: !prevPackage?.current_location
-          ? prevPackage?.current_location
-          : values.current_location,
-        book_status: !prevPackage?.book_status
-          ? prevPackage?.book_status
-          : values.status,
+        lat: prevPackage?.lat === +values.lat ? prevPackage.lat : +values.lat,
+
+        long:
+          prevPackage?.long === +values.long ? prevPackage.long : +values.long,
+
+        current_location:
+          prevPackage?.current_location == values.current_location
+            ? prevPackage.current_location
+            : values.current_location,
+        book_status:
+          prevPackage?.book_status === values.status
+            ? prevPackage.book_status
+            : values.status,
+
+        // lat: !prevPackage?.lat ? prevPackage?.lat : +values.lat,
+        // long: !prevPackage?.long ? prevPackage?.long : +values.long,
+        // current_location: !prevPackage?.current_location
+        //   ? prevPackage?.current_location
+        //   : values.current_location,
+        // book_status: !prevPackage?.book_status
+        //   ? prevPackage?.book_status
+        //   : values.status,
       },
     });
 
