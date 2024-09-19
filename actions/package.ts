@@ -39,7 +39,7 @@ export const addPackage = async (values: z.infer<typeof formSchema>) => {
       // packageId: createdPackage.id,
     };
   } catch (error) {
-    console.error("Error creating package:", error);
+    // console.error("Error creating package:", error);
     // Handle error based on error type (e.g., validation, database)
     return {
       message: "An error occurred while creating the package",
@@ -63,6 +63,8 @@ export const findPackages = async (tracking_number: any) => {
         tracking_number,
       },
     });
+
+    console.log(parcel);
 
     return parcel;
   } catch (error) {
