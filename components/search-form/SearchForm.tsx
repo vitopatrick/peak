@@ -14,8 +14,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { findPackages } from "@/actions/package";
 import ParcelInfo from "../parcel-info/ParcelInfo";
+import { db } from "@/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 const formSchema = z.object({
   tracking_number: z.string(),
@@ -30,15 +31,17 @@ const SearchForm = () => {
   });
 
   const [parcel, setParcel] = useState<any>();
-  const [error, setError] = useState<any>();
+  const [error, setError] = useState<any>(null);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const parcel = await findPackages(values.tracking_number);
+    const docRef = doc(db, "packages", values.tracking_number);
+    const parcelSnapshot = await getDoc(docRef);
 
-    if (parcel) {
-      setParcel(parcel);
+    if (parcelSnapshot.exists()) {
+      // Set the parcel data to state
+      setParcel({ id: parcelSnapshot.id, ...parcelSnapshot.data() });
     } else {
-      setError("Parcel Does not exist");
+      setError("Parcel not found");
     }
   }
 
@@ -66,7 +69,7 @@ const SearchForm = () => {
         </form>
       </Form>
       <ParcelInfo info={parcel} />
-      {error && <p className="text-center p-4 text-red-800 text-xl">{error}</p>}
+      {error ? <p className="text-center uppercase">{error}</p> : null}
     </div>
   );
 };

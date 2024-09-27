@@ -1,15 +1,18 @@
-import { getPackages } from "@/actions/package";
+"use client";
+
 import CreateParcelForm from "@/components/createparcelForm/CreateParcelForm";
 import PackagesTable from "@/components/packages_table/PackagesTable";
+import { useFetchAllPackages } from "@/hooks/useFetchAllPackages";
 
-const ControlPage = async () => {
-  const packages = await getPackages();
+const ControlPage = () => {
+  const { packages } = useFetchAllPackages();
+
+  console.log(packages);
 
   return (
     <div>
       <CreateParcelForm />
-      {Array.isArray(packages) ? <PackagesTable packages={packages} /> : []}
-      {/* {packages ? <PackagesTable /> : null} */}
+      {packages ? <PackagesTable packages={packages} /> : null}
     </div>
   );
 };

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Table,
   TableBody,
@@ -8,24 +10,10 @@ import {
 } from "@/components/ui/table";
 import { Button } from "../ui/button";
 import { Trash } from "lucide-react";
-import { prisma } from "@/prisma/script";
-import { revalidatePath } from "next/cache";
 import UpdateParcel from "../update-parcel/UpdateParcel";
 
 export default function PackagesTable({ packages }: any) {
-  // console.log(packages);
-
-  const delete_parcel = async (id: any) => {
-    "use server";
-
-    await prisma.package.delete({
-      where: {
-        id,
-      },
-    });
-
-    revalidatePath("/control");
-  };
+  const delete_parcel = async (id: any) => {};
 
   return (
     <>
@@ -41,9 +29,9 @@ export default function PackagesTable({ packages }: any) {
           </TableHeader>
           <TableBody>
             {packages.map((parcel: any) => (
-              <TableRow key={parcel.tracking_number}>
+              <TableRow key={parcel.id}>
                 <TableCell className="font-mono uppercase tracking-wider">
-                  {parcel.tracking_number}
+                  {parcel.id}
                 </TableCell>
                 <TableCell>{parcel.weight}kg</TableCell>
                 <TableCell>{parcel.sender_name}</TableCell>

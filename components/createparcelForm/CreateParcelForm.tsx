@@ -19,8 +19,9 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
-import { addPackage } from "@/actions/package";
 import { toast } from "sonner";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "@/firebase";
 
 export const formSchema = z.object({
   sender_name: z.string().max(50),
@@ -59,9 +60,17 @@ const CreateParcelForm = () => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const request: any = await addPackage(values);
+    const packageRef = collection(db, "packages");
 
-    toast.success(request.message);
+    await addDoc(packageRef, {
+      ...values,
+      lat: 46.4702,
+      long: 30.7306,
+      current_location: "ukraine",
+      book_status: "in office",
+    });
+
+    toast.success("Package Created");
   }
 
   return (

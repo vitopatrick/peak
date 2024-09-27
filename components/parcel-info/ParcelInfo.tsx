@@ -48,7 +48,7 @@ const ParcelInfo = ({ info }: any) => {
               <p>
                 Posting Date:{" "}
                 <span className="font-semibold capitalize">
-                  {formalDate(info.posting_date)}
+                  {formalDate(info.posting_date.toDate())}
                 </span>{" "}
               </p>
             </div>
@@ -86,25 +86,17 @@ const ParcelInfo = ({ info }: any) => {
               <p>
                 Pick Up Date:{" "}
                 <span className="font-semibold capitalize">
-                  {formalDate(info.pickup_date)}
+                  {formalDate(info.pickup_date.toDate())}
                 </span>
               </p>
               <p>
                 Tracking Number:{" "}
-                <span className=" uppercase font-mono">
-                  {info.tracking_number}
-                </span>{" "}
+                <span className=" uppercase font-mono">{info.id}</span>{" "}
               </p>
               <p>
                 Status:{" "}
                 <span className="font-semibold capitalize">
-                  {info.book_status === null ? "in Office" : info.book_status}
-                </span>
-              </p>
-              <p>
-                last updated:{" "}
-                <span className="font-semibold capitalize">
-                  {formalDate(info.updatedAt)}
+                  {info.book_status ? info.book_status : "in Office"}
                 </span>
               </p>
             </div>

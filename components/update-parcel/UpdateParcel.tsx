@@ -29,8 +29,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { updatePackage } from "@/actions/package";
 import { toast } from "sonner";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "@/firebase";
 
 export const updateSchema = z.object({
   lat: z.string().max(50),
@@ -51,9 +52,13 @@ export default function UpdateParcel({ id }: any) {
   });
 
   const onSubmit = async (values: z.infer<typeof updateSchema>) => {
-    const response: any = await updatePackage(values, id);
+    const packageRef = doc(db, "packages", id);
 
-    toast.success(response);
+    await updateDoc(packageRef, {
+      ...values,
+    });
+
+    toast.success("Update");
   };
 
   return (
