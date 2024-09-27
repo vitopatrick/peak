@@ -11,9 +11,23 @@ import {
 import { Button } from "../ui/button";
 import { Trash } from "lucide-react";
 import UpdateParcel from "../update-parcel/UpdateParcel";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "@/firebase";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function PackagesTable({ packages }: any) {
-  const delete_parcel = async (id: any) => {};
+  const navigate = useRouter();
+
+  const delete_parcel = async (id: any) => {
+    const ref = doc(db, "packages", id);
+
+    await deleteDoc(ref);
+
+    toast.success("Deleted Package");
+
+    navigate.refresh();
+  };
 
   return (
     <>
@@ -36,11 +50,13 @@ export default function PackagesTable({ packages }: any) {
                 <TableCell>{parcel.weight}kg</TableCell>
                 <TableCell>{parcel.sender_name}</TableCell>
                 <TableCell className="text-right  flex items-center gap-3">
-                  <form action={delete_parcel.bind(null, parcel.id)}>
-                    <Button variant={"destructive"}>
-                      <Trash />
-                    </Button>
-                  </form>
+                  <Button
+                    variant={"destructive"}
+                    onClick={() => delete_parcel(parcel.id)}
+                  >
+                    <Trash />
+                  </Button>
+
                   <UpdateParcel id={parcel.id} />
                 </TableCell>
               </TableRow>
