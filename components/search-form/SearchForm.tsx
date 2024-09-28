@@ -17,6 +17,7 @@ import { useState } from "react";
 import ParcelInfo from "../parcel-info/ParcelInfo";
 import { db } from "@/firebase";
 import { doc, getDoc } from "firebase/firestore";
+import { capitalizeFirstLetter } from "@/lib/utils";
 
 const formSchema = z.object({
   tracking_number: z.string(),
@@ -34,14 +35,21 @@ const SearchForm = () => {
   const [error, setError] = useState<any>(null);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const docRef = doc(db, "packages", values.tracking_number);
-    const parcelSnapshot = await getDoc(docRef);
+    try {
+      const id = capitalizeFirstLetter(values.tracking_number);
 
-    if (parcelSnapshot.exists()) {
-      // Set the parcel data to state
-      setParcel({ id: parcelSnapshot.id, ...parcelSnapshot.data() });
-    } else {
-      setError("Parcel not found");
+      const docRef = doc(db, "packages", id);
+      const parcelSnapshot = await getDoc(docRef);
+
+      if (parcelSnapshot.exists()) {
+        // Set the parcel data to state
+        setParcel({ id: parcelSnapshot.id, ...parcelSnapshot.data() });
+      } else {
+        setError("Parcel not found");
+      }
+    } catch (error) {
+      console.error("Error fetching parcel:", error);
+      setError("An error occurred while fetching the parcel.");
     }
   }
 
