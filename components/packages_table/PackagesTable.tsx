@@ -44,7 +44,7 @@ export default function PackagesTable({ packages }: any) {
           <TableBody>
             {packages.map((parcel: any) => (
               <TableRow key={parcel.id}>
-                <TableCell className="font-mono uppercase tracking-wider">
+                <TableCell className="font-mono tracking-wider">
                   {parcel.id}
                 </TableCell>
                 <TableCell>{parcel.weight}kg</TableCell>

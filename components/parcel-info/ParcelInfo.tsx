@@ -90,8 +90,7 @@ const ParcelInfo = ({ info }: any) => {
                 </span>
               </p>
               <p>
-                Tracking Number:{" "}
-                <span className=" uppercase font-mono">{info.id}</span>{" "}
+                Tracking Number: <span className="font-mono">{info.id}</span>{" "}
               </p>
               <p>
                 Status:{" "}
